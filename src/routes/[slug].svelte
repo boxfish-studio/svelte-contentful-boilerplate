@@ -18,6 +18,8 @@
 	import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 	import Button from './../components/Button'
 	import SecondaryButton from './../components/SecondaryButton'
+	import ComponentSwitch from './../components/ComponentSwitch'
+
 
 	export let page
 	console.log(page);
@@ -30,13 +32,16 @@
 <h1>{page.title}</h1>
 
 <div class='content'>
+
+
 	{#each page.components as comp}
+		<ComponentSwitch componentType={comp.type} props={{title: 'algo', url: 'https://google.es'}}/>
 		{#if comp.type === 'button'}
-			<Button title={comp.fields.title} url={comp.fields.url}/>
+			<!-- <Button title={comp.field	s.title} url={comp.fields.url}/> -->
 		{:else if comp.type === 'secondaryButton'}
-			<SecondaryButton title={comp.fields.title} url={comp.fields.url}/>
+			<!-- <SecondaryButton title={comp.fields.title} url={comp.fields.url}/> -->
 		{:else if comp.type === 'textBlock'}
-			<p>{@html documentToHtmlString(comp.fields.text)}</p>
+			<!-- <p>{@html documentToHtmlString(comp.fields.text)}</p> -->
 		{/if}
 	{/each}
 </div>
