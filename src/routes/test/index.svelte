@@ -12,7 +12,7 @@
 </script>
 
 <script>
-    export let fetchedTests
+    export let fetchedTests        
 </script>
 
 <style>

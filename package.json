@@ -4,11 +4,13 @@
     "version": "0.0.1",
     "scripts": {
         "dev": "sapper dev --no-hot",
+        "dev-draft": "DRAFT_MODE=true sapper dev --no-hot",
         "build": "sapper build",
         "export": "sapper export",
         "start": "node __sapper__/build"
     },
     "dependencies": {
+        "@contentful/rich-text-html-renderer": "^13.4.0",
         "@types/node": "^12.12.14",
         "apisauce": "^1.1.1",
         "compression": "^1.7.1",

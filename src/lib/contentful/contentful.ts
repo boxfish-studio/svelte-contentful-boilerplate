@@ -1,15 +1,15 @@
 import { ContentfulClientApi, createClient } from 'contentful'
-import { Test } from './contentful.types'
+import { Page, Test } from './contentful.types'
 
 export class ContentfulApi {
     client: ContentfulClientApi
 
     constructor() {
-        const staging = process.env.STAGING
+        const draftMode = process.env.DRAFT_MODE
         this.client = createClient({
             space: process.env.CONTENTFUL_SPACE,
-            accessToken: staging ? process.env.CONTENTFUL_STAGING_TOKEN : process.env.CONTENTFUL_ACCESS_TOKEN,
-            host: staging ? 'preview.contentful.com' : null,
+            accessToken: draftMode ? process.env.CONTENTFUL_STAGING_TOKEN : process.env.CONTENTFUL_ACCESS_TOKEN,
+            host: draftMode ? 'preview.contentful.com' : null,
             resolveLinks: true
         })
     }
@@ -33,6 +33,45 @@ export class ContentfulApi {
         return {
             id: rawData.sys.id,
             title: rawProject.title
+        }
+    }
+
+    async fetchPage(slug: string): Promise<Page> {
+        return await this.client
+            .getEntries({
+                content_type: 'page',
+                'fields.slug[in]': slug
+            })
+            .then((entry) => {
+                if (entry && entry.items && entry.items.length > 0) {
+                    return this.convertPage(entry.items[0])
+                }
+                return null
+            })
+    }
+
+    convertPage = (rawData: any): Page => {
+        const rawProject = rawData.fields
+        const components = rawProject.components.map(comp => {
+            return this.convertComponents(comp)
+        })
+        
+        return {
+            id: rawData.sys.id,
+            title: rawProject.title,
+            slug: rawProject.slug,
+            components: components
+        }
+    }
+
+    convertComponents = (rawData: any): any => {
+        const componentFields = rawData.fields
+        const componentType = rawData.sys.contentType.sys.id
+
+        return {
+            id: rawData.sys.id,
+            type: componentType,
+            fields: componentFields,
         }
     }
 }
