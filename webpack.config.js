@@ -38,6 +38,21 @@ module.exports = {
                             hotReload: dev
                         }
                     }
+                },
+                {
+                    test: /\.css$/,
+                    exclude: /node_modules/,
+                    use: [
+                        'style-loader',
+                        { loader: 'css-loader', options: { importLoaders: 1 } },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                ident: 'postcss',
+                                plugins: [require('tailwindcss'), require('autoprefixer')]
+                            }
+                        }
+                    ]
                 }
             ]
         },

@@ -6,10 +6,9 @@
 <style>
     .btn {
         padding: 10px;
-        background-color: purple;
         color: white;
         margin: 10px;
     }
 </style>
 
-<a class="btn" href={url}>{title}</a>
+<a class="btn bg-black" href={url}>{title}</a>
