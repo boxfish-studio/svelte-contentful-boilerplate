@@ -52,10 +52,10 @@ export class ContentfulApi {
 
     convertPage = (rawData: any): Page => {
         const rawProject = rawData.fields
-        const components = rawProject.components.map(comp => {
+        const components = rawProject.components.map((comp) => {
             return this.convertComponents(comp)
         })
-        
+
         return {
             id: rawData.sys.id,
             title: rawProject.title,
@@ -71,7 +71,7 @@ export class ContentfulApi {
         return {
             id: rawData.sys.id,
             type: componentType,
-            fields: componentFields,
+            fields: componentFields
         }
     }
 }

@@ -1,6 +1,6 @@
 <script>
-    export let title
-    export let url
+    export let props
+    const { title, url } = props
 </script>
 
 <style>
@@ -8,7 +8,8 @@
         padding: 10px;
         background-color: gray;
         color: white;
+        margin: 10px;
     }
 </style>
 
-<a class="btn" href="{url}">{title}</a>
+<a class="btn" href={url}>{title}</a>
