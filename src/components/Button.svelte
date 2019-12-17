@@ -5,10 +5,15 @@
 
 <style>
     .btn {
+        @apply bg-white;
         padding: 10px;
-        color: white;
+        color: green;
         margin: 10px;
+    }
+
+    a {
+        @apply text-2xl;
     }
 </style>
 
-<a class="btn bg-black" href={url}>{title}</a>
+<a class="btn" href={url}>{title}</a>
