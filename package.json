@@ -16,6 +16,7 @@
         "compression": "^1.7.1",
         "contentful": "^7.10.0",
         "dotenv": "^8.2.0",
+        "marked": "^0.8.0",
         "polka": "next",
         "sirv": "^0.4.0",
         "ts-loader": "^6.2.1",

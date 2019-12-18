@@ -27,7 +27,7 @@
 
 <div class="content">
 
-    {#each page.components as comp}
-        <ComponentSwitch componentType={comp.type} props={comp.fields} />
+    {#each page.components as component}
+        <ComponentSwitch {component} />
     {/each}
 </div>

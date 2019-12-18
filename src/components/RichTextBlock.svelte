@@ -9,6 +9,4 @@
 
 </style>
 
-<p>
-    {@html documentToHtmlString(text)}
-</p>
+{@html documentToHtmlString(text)}

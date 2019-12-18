@@ -1,20 +1,22 @@
 <script>
     import Button from './Button'
     import SecondaryButton from './SecondaryButton'
-    import TextBlock from './TextBlock'
+    import RichTextBlock from './RichTextBlock'
+    import MarkdownBlock from './MarkdownBlock'
 
-    export let componentType
-    export let props
+    export let component
 
     let COMPONENT_LIST = [
-        { id: 'button', component: Button },
-        { id: 'secondaryButton', component: SecondaryButton },
-        { id: 'textBlock', component: TextBlock }
+        { id: 'button', componentName: Button },
+        { id: 'secondaryButton', componentName: SecondaryButton },
+        { id: 'richTextBlock', componentName: RichTextBlock },
+        { id: 'markdownBlock', componentName: MarkdownBlock }
     ]
 
-    const selectedComponent = COMPONENT_LIST.filter((item) => item.id === componentType)[0]
+    const selectedComponent = COMPONENT_LIST.filter((item) => item.id === component.type)[0]
+    // console.log(selectedComponent.componentName)
 </script>
 
-{#if selectedComponent && selectedComponent.component}
-    <svelte:component this={selectedComponent.component} {props} />
+{#if selectedComponent && selectedComponent.componentName}
+    <svelte:component this={selectedComponent.componentName} props={component.fields} />
 {/if}

@@ -1,5 +1,5 @@
 import { ContentfulClientApi, createClient } from 'contentful'
-import { Page, Test } from './contentful.types'
+import { Page, Test, Component } from './contentful.types'
 
 export class ContentfulApi {
     client: ContentfulClientApi
@@ -53,7 +53,7 @@ export class ContentfulApi {
     convertPage = (rawData: any): Page => {
         const rawProject = rawData.fields
         const components = rawProject.components.map((comp) => {
-            return this.convertComponents(comp)
+            return this.convertComponent(comp)
         })
 
         return {
@@ -64,7 +64,7 @@ export class ContentfulApi {
         }
     }
 
-    convertComponents = (rawData: any): any => {
+    convertComponent = (rawData: any): Component => {
         const componentFields = rawData.fields
         const componentType = rawData.sys.contentType.sys.id
 
