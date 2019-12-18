@@ -15,5 +15,6 @@ const production = !process.env.NODE_ENV === 'development'
 // }
 
 module.exports = {
-    plugins: [require('tailwindcss')]
+    syntax: require('postcss-scss'),
+    plugins: [require('precss'), require('tailwindcss')]
 }

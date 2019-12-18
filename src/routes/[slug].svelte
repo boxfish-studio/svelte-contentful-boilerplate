@@ -19,6 +19,18 @@
     export let page
 </script>
 
+<style type="text/scss">
+    $color: gray;
+
+    h1 {
+        color: $color;
+    }
+
+    div {
+        background: lightgray;
+    }
+</style>
+
 <svelte:head>
     <title>{page.title}</title>
 </svelte:head>
@@ -26,7 +38,6 @@
 <h1>{page.title}</h1>
 
 <div class="content">
-
     {#each page.components as comp}
         <ComponentSwitch componentType={comp.type} props={comp.fields} />
     {/each}

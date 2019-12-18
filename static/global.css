@@ -8376,6 +8376,10 @@ code {
   border-radius: 2px;
 }
 
+.content {
+  border: 1px solid black;
+}
+
 @media (min-width: 400px) {
   body {
     font-size: 16px;

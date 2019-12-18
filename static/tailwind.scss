@@ -39,6 +39,12 @@ code {
     border-radius: 2px;
 }
 
+$border-color: black;
+
+.content {
+    border: 1px solid $border-color;
+}
+
 @media (min-width: 400px) {
     body {
         font-size: 16px;
