@@ -3,9 +3,9 @@
     "description": "TODO",
     "version": "0.0.1",
     "scripts": {
-        "dev-draft-w-tailwind": "postcss static/tailwind.css -o static/global.css -w & npm run dev-draft",
+        "dev-draft-tailwind-w": "npm run dev-draft & postcss static/tailwind.css -o static/global.css -w &",
         "build:tailwind": "NODE_ENV=production postcss static/tailwind.css -o static/global.css",
-        "build": "npm run build:tailwind && sapper build --legacy",
+        "build": "npm run build:tailwind && sapper build",
         "dev": "sapper dev --no-hot",
         "dev-draft": "DRAFT_MODE=true sapper dev --no-hot",
         "export": "sapper export",
