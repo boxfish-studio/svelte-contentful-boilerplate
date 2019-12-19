@@ -65,5 +65,8 @@
         <li>
             <a class:selected={segment === 'test'} href="test">contentful test</a>
         </li>
+        <li>
+            <a class:selected={segment === 'mypage'} href="mypage">mypage</a>
+        </li>
     </ul>
 </nav>

@@ -14,6 +14,34 @@ export class ContentfulApi {
         })
     }
 
+    async fetchNavLinks(): Promise<Array<any>> {
+        return await this.client
+            .getEntries({
+                content_type: 'page',
+                'fields.appearInNavigation': true
+            })
+            .then((entries) => {
+                if (entries && entries.items && entries.items.length > 0) {
+                    const fetchedItems = entries.items.map((entry) => this.convertNavLink(entry))
+                    return fetchedItems
+                }
+                return []
+            })
+            .catch((err) => {
+                console.log(err)
+                return []
+            })
+    }
+
+    convertNavLink = (rawData: any): any => {
+        const rawProject = rawData.fields
+        return {
+            id: rawData.sys.id,
+            title: rawProject.navBarTitle,
+            slug: rawProject.slug
+        }
+    }
+
     async fetchTests(): Promise<Array<Test>> {
         return await this.client
             .getEntries({
@@ -52,9 +80,12 @@ export class ContentfulApi {
 
     convertPage = (rawData: any): Page => {
         const rawProject = rawData.fields
-        const components = rawProject.components.map((comp) => {
-            return this.convertComponent(comp)
-        })
+        const components =
+            rawProject.components && rawProject.components.length > 0
+                ? rawProject.components.map((comp) => {
+                      return this.convertComponent(comp)
+                  })
+                : []
 
         return {
             id: rawData.sys.id,

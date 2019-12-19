@@ -5,6 +5,7 @@
     import MarkdownBlock from './MarkdownBlock'
 
     export let component
+    // console.log(component)
 
     let COMPONENT_LIST = [
         { id: 'button', componentName: Button },
