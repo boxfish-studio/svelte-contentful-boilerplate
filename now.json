@@ -1,0 +1,7 @@
+{
+    "env": {
+        "CONTENTFUL_SPACE": "@contentful_space",
+        "CONTENTFUL_ACCESS_TOKEN": "@contentful_access_token",
+        "CONTENTFUL_STAGING_TOKEN": "@contentful_staging_token"
+    }
+}

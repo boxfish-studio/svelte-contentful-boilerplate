@@ -1,0 +1,5 @@
+__sapper__
+cypress
+node_modules
+.env
+.vscode
