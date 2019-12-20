@@ -19,6 +19,18 @@
     export let page
 </script>
 
+<style type="text/scss">
+    $color: gray;
+
+    h1 {
+        color: $color;
+    }
+
+    div {
+        background: lightgray;
+    }
+</style>
+
 <svelte:head>
     <title>{page.title}</title>
 </svelte:head>

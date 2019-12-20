@@ -5,8 +5,4 @@
     const { text } = props
 </script>
 
-<style>
-
-</style>
-
 {@html documentToHtmlString(text)}
