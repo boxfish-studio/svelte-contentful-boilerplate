@@ -2,13 +2,6 @@
     import { ContentfulApi } from '~/lib/contentful/'
     import { onMount } from 'svelte'
 
-    // async function fetchNavLinks() {
-    //     const api = new ContentfulApi()
-    //     const navLinks = await api.fetchNavLinks()
-    //     return navLinks
-    // }
-    // const navLinks = fetchNavLinks()
-
     let navLinks = []
     onMount(() => {
         const api = new ContentfulApi()
