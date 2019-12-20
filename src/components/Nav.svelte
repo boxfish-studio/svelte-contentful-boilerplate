@@ -2,13 +2,20 @@
     import { ContentfulApi } from '~/lib/contentful/'
     import { onMount } from 'svelte'
 
-    async function fetchNavLinks() {
-        const api = new ContentfulApi()
-        const navLinks = await api.fetchNavLinks()
-        return navLinks
-    }
+    // async function fetchNavLinks() {
+    //     const api = new ContentfulApi()
+    //     const navLinks = await api.fetchNavLinks()
+    //     return navLinks
+    // }
+    // const navLinks = fetchNavLinks()
 
-    const navLinks = fetchNavLinks()
+    let navLinks = []
+    onMount(() => {
+        const api = new ContentfulApi()
+        api.fetchNavLinks().then((links) => {
+            navLinks = links
+        })
+    })
 
     export let segment
 </script>
@@ -59,28 +66,27 @@
     }
 </style>
 
-<nav>
-    <ul>
-        <li>
-            <a class:selected={segment === undefined} href=".">home</a>
-        </li>
-        <li>
-            <a class:selected={segment === 'about'} href="about">about</a>
-        </li>
+{#if navLinks.length > 0}
+    <nav>
+        <ul>
+            <li>
+                <a class:selected={segment === undefined} href=".">home</a>
+            </li>
+            <li>
+                <a class:selected={segment === 'about'} href="about">about</a>
+            </li>
 
-        <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
+            <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
-        <li>
-            <a rel="prefetch" class:selected={segment === 'blog'} href="blog">blog</a>
-        </li>
-        {#await navLinks then navLinks}
+            <li>
+                <a rel="prefetch" class:selected={segment === 'blog'} href="blog">blog</a>
+            </li>
             <!-- Contentfull are loaded here -->
             {#each navLinks as navLink}
                 <li>
-                    <!-- rel=prefetch to prefecth contentful data when we hover over the link or tap it on a touchsreen -->
                     <a rel="prefetch" href={navLink.slug} class:selected={segment === navLink.slug}>{navLink.title}</a>
                 </li>
             {/each}
-        {/await}
-    </ul>
-</nav>
+        </ul>
+    </nav>
+{/if}
