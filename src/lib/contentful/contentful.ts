@@ -1,5 +1,5 @@
 import { ContentfulClientApi, createClient } from 'contentful'
-import { Page, Test, Component } from './contentful.types'
+import { Page, Test, Component, NavLink } from './contentful.types'
 
 export class ContentfulApi {
     client: ContentfulClientApi
@@ -14,7 +14,7 @@ export class ContentfulApi {
         })
     }
 
-    async fetchNavLinks(): Promise<Array<any>> {
+    async fetchNavLinks(): Promise<Array<NavLink>> {
         return await this.client
             .getEntries({
                 content_type: 'page',
@@ -28,12 +28,11 @@ export class ContentfulApi {
                 return []
             })
             .catch((err) => {
-                console.log(err)
                 return []
             })
     }
 
-    convertNavLink = (rawData: any): any => {
+    convertNavLink = (rawData: any): NavLink => {
         const rawProject = rawData.fields
         return {
             id: rawData.sys.id,
@@ -82,9 +81,7 @@ export class ContentfulApi {
         const rawProject = rawData.fields
         const components =
             rawProject.components && rawProject.components.length > 0
-                ? rawProject.components.map((comp) => {
-                      return this.convertComponent(comp)
-                  })
+                ? rawProject.components.map((comp) => this.convertComponent(comp))
                 : []
 
         return {

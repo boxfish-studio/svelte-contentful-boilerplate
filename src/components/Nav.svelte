@@ -1,4 +1,15 @@
 <script>
+    import { ContentfulApi } from '~/lib/contentful/'
+    import { onMount } from 'svelte'
+
+    async function fetchNavLinks() {
+        const api = new ContentfulApi()
+        const navLinks = await api.fetchNavLinks()
+        return navLinks
+    }
+
+    const navLinks = fetchNavLinks()
+
     export let segment
 </script>
 
@@ -62,11 +73,14 @@
         <li>
             <a rel="prefetch" class:selected={segment === 'blog'} href="blog">blog</a>
         </li>
-        <li>
-            <a class:selected={segment === 'test'} href="test">contentful test</a>
-        </li>
-        <li>
-            <a class:selected={segment === 'mypage'} href="mypage">mypage</a>
-        </li>
+        {#await navLinks then navLinks}
+            <!-- Contentfull are loaded here -->
+            {#each navLinks as navLink}
+                <li>
+                    <!-- rel=prefetch to prefecth contentful data when we hover over the link or tap it on a touchsreen -->
+                    <a rel="prefetch" href={navLink.slug} class:selected={segment === navLink.slug}>{navLink.title}</a>
+                </li>
+            {/each}
+        {/await}
     </ul>
 </nav>

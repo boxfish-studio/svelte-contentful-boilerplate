@@ -8,16 +8,16 @@
     // console.log(component)
 
     let COMPONENT_LIST = [
-        { id: 'button', componentName: Button },
-        { id: 'secondaryButton', componentName: SecondaryButton },
-        { id: 'richTextBlock', componentName: RichTextBlock },
-        { id: 'markdownBlock', componentName: MarkdownBlock }
+        { id: 'button', componentData: Button },
+        { id: 'secondaryButton', componentData: SecondaryButton },
+        { id: 'richTextBlock', componentData: RichTextBlock },
+        { id: 'markdownBlock', componentData: MarkdownBlock }
     ]
 
     const selectedComponent = COMPONENT_LIST.filter((item) => item.id === component.type)[0]
-    // console.log(selectedComponent.componentName)
+    // console.log(selectedComponent.componentData)
 </script>
 
-{#if selectedComponent && selectedComponent.componentName}
-    <svelte:component this={selectedComponent.componentName} props={component.fields} />
+{#if selectedComponent && selectedComponent.componentData}
+    <svelte:component this={selectedComponent.componentData} props={component.fields} />
 {/if}
