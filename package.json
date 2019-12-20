@@ -5,7 +5,7 @@
     "scripts": {
         "dev-draft-tailwind-w": "postcss static/tailwind.scss -o static/global.css -w & npm run dev-draft",
         "build:tailwind": "NODE_ENV=production postcss static/tailwind.scss -o static/global.css",
-        "build": "npm run build:tailwind && sapper export",
+        "build": "npm run build:tailwind && sapper build",
         "dev": "sapper dev --no-hot",
         "dev-draft": "DRAFT_MODE=true sapper dev --no-hot",
         "export": "sapper export",
@@ -21,6 +21,7 @@
         "css-loader": "^3.3.2",
         "dotenv": "^8.2.0",
         "marked": "^0.8.0",
+        "now-sapper": "^0.37.1",
         "polka": "next",
         "postcss": "^7.0.25",
         "postcss-import": "^12.0.1",

@@ -1,4 +1,7 @@
 {
+    "version": 2,
+    "name": "svelte-contentful-sandbox",
+    "builds": [{ "src": "package.json", "use": "now-sapper" }],
     "env": {
         "CONTENTFUL_SPACE": "@contentful_space",
         "CONTENTFUL_ACCESS_TOKEN": "@contentful_access_token",
