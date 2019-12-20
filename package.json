@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "scripts": {
         "dev-draft-tailwind-w": "postcss static/tailwind.scss -o static/global.css -w & npm run dev-draft",
-        "build:tailwind": "NODE_ENV=production postcss static/tailwind.css -o static/global.css",
+        "build:tailwind": "NODE_ENV=production postcss static/tailwind.scss -o static/global.css",
         "build": "npm run build:tailwind && sapper build",
         "dev": "sapper dev --no-hot",
         "dev-draft": "DRAFT_MODE=true sapper dev --no-hot",
