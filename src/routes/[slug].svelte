@@ -1,8 +1,7 @@
 <script context="module">
-    export async function preload({ params, query }) {
-        // the `slug` parameter is available because
-        // this file is called [slug].svelte
-        const res = await this.fetch(`/${params.slug}.json`)
+    export async function preload({ params, query, host }) {
+        const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+        const res = await this.fetch(`${protocol}://${host}/${params.slug}.json`)
         const data = await res.json()
 
         if (res.status === 200) {

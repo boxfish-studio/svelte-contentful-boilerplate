@@ -9,7 +9,9 @@
         "dev": "sapper dev --no-hot",
         "dev-draft": "DRAFT_MODE=true sapper dev --no-hot",
         "export": "sapper export",
-        "start": "node __sapper__/build"
+        "start": "node __sapper__/build",
+        "deploy-draft": "now --env DRAFT_MODE=true --name draft-svelte-contentful-sandbox",
+        "deploy-production": "now"
     },
     "dependencies": {
         "@contentful/rich-text-html-renderer": "^13.4.0",
