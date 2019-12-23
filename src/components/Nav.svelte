@@ -1,16 +1,6 @@
 <script>
-    import { ContentfulApi } from '~/lib/contentful/'
-    import { onMount } from 'svelte'
-
-    let navLinks = []
-    onMount(() => {
-        const api = new ContentfulApi()
-        api.fetchNavLinks().then((links) => {
-            navLinks = links
-        })
-    })
-
     export let segment
+    export let navLinks
 </script>
 
 <style>
