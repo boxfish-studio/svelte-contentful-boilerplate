@@ -1,6 +1,7 @@
 <script context="module">
-    export async function preload(page) {
-        const res = await this.fetch(`nav.json`)
+    export async function preload({ params, query, host }) {
+        const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+        const res = await this.fetch(`${protocol}://${host}/nav.json`)
         const fetchedLinks = await res.json()
 
         if (res.status === 200) {
