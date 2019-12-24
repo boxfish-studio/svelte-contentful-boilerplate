@@ -38,7 +38,7 @@
 
 <div class="content">
 
-    {#each page.components as component}
-        <ComponentSwitch {component} />
+    {#each page.components as componentData (componentData.id)}
+        <ComponentSwitch {componentData} />
     {/each}
 </div>

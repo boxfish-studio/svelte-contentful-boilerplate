@@ -15,3 +15,9 @@ export type Component = {
     type: string
     fields: Array<any>
 }
+
+export type NavLink = {
+    id: string
+    title: string
+    slug: string
+}

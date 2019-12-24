@@ -4,19 +4,18 @@
     import RichTextBlock from './RichTextBlock'
     import MarkdownBlock from './MarkdownBlock'
 
-    export let component
+    export let componentData
 
     let COMPONENT_LIST = [
-        { id: 'button', componentName: Button },
-        { id: 'secondaryButton', componentName: SecondaryButton },
-        { id: 'richTextBlock', componentName: RichTextBlock },
-        { id: 'markdownBlock', componentName: MarkdownBlock }
+        { id: 'button', component: Button },
+        { id: 'secondaryButton', component: SecondaryButton },
+        { id: 'richTextBlock', component: RichTextBlock },
+        { id: 'markdownBlock', component: MarkdownBlock }
     ]
 
-    const selectedComponent = COMPONENT_LIST.filter((item) => item.id === component.type)[0]
-    // console.log(selectedComponent.componentName)
+    const selectedComponent = COMPONENT_LIST.filter((item) => item.id === componentData.type)[0]
 </script>
 
-{#if selectedComponent && selectedComponent.componentName}
-    <svelte:component this={selectedComponent.componentName} props={component.fields} />
+{#if selectedComponent && selectedComponent.component}
+    <svelte:component this={selectedComponent.component} props={componentData.fields} />
 {/if}

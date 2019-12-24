@@ -1,5 +1,6 @@
 <script>
     export let segment
+    export let navLinks
 </script>
 
 <style>
@@ -48,22 +49,27 @@
     }
 </style>
 
-<nav>
-    <ul>
-        <li>
-            <a class:selected={segment === undefined} href=".">home</a>
-        </li>
-        <li>
-            <a class:selected={segment === 'about'} href="about">about</a>
-        </li>
+{#if navLinks.length > 0}
+    <nav>
+        <ul>
+            <li>
+                <a class:selected={segment === undefined} href=".">home</a>
+            </li>
+            <li>
+                <a class:selected={segment === 'about'} href="about">about</a>
+            </li>
 
-        <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
+            <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
-        <li>
-            <a rel="prefetch" class:selected={segment === 'blog'} href="blog">blog</a>
-        </li>
-        <li>
-            <a class:selected={segment === 'test'} href="test">contentful test</a>
-        </li>
-    </ul>
-</nav>
+            <li>
+                <a rel="prefetch" class:selected={segment === 'blog'} href="blog">blog</a>
+            </li>
+            <!-- Contentfull are loaded here -->
+            {#each navLinks as navLink}
+                <li>
+                    <a rel="prefetch" href={navLink.slug} class:selected={segment === navLink.slug}>{navLink.title}</a>
+                </li>
+            {/each}
+        </ul>
+    </nav>
+{/if}

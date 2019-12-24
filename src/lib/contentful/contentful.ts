@@ -1,5 +1,5 @@
 import { ContentfulClientApi, createClient } from 'contentful'
-import { Page, Test, Component } from './contentful.types'
+import { Page, Test, Component, NavLink } from './contentful.types'
 
 export class ContentfulApi {
     client: ContentfulClientApi
@@ -12,6 +12,33 @@ export class ContentfulApi {
             host: draftMode ? 'preview.contentful.com' : null,
             resolveLinks: true
         })
+    }
+
+    async fetchNavLinks(): Promise<Array<NavLink>> {
+        return await this.client
+            .getEntries({
+                content_type: 'page',
+                'fields.appearInNavigation': true
+            })
+            .then((entries) => {
+                if (entries && entries.items && entries.items.length > 0) {
+                    const fetchedItems = entries.items.map((entry) => this.convertNavLink(entry))
+                    return fetchedItems
+                }
+                return []
+            })
+            .catch((err) => {
+                return []
+            })
+    }
+
+    convertNavLink = (rawData: any): NavLink => {
+        const rawProject = rawData.fields
+        return {
+            id: rawData.sys.id,
+            title: rawProject.navBarTitle,
+            slug: rawProject.slug
+        }
     }
 
     async fetchTests(): Promise<Array<Test>> {
@@ -52,9 +79,10 @@ export class ContentfulApi {
 
     convertPage = (rawData: any): Page => {
         const rawProject = rawData.fields
-        const components = rawProject.components.map((comp) => {
-            return this.convertComponent(comp)
-        })
+        const components =
+            rawProject.components && rawProject.components.length > 0
+                ? rawProject.components.map((comp) => this.convertComponent(comp))
+                : []
 
         return {
             id: rawData.sys.id,
