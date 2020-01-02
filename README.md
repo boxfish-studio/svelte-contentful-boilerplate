@@ -1,106 +1,155 @@
-# sapper-template
+# Svelte Sapper Contentful Boilerplate
 
-The default [Sapper](https://github.com/sveltejs/sapper) template, available for Rollup and webpack.
+This is a boilerplate based on the default [Sapper](https://github.com/sveltejs/sapper) template, which also includes the CMS (Content Management System) [Contentful](https://www.contentful.com/).
+
+Besides, this boilerplate gives you the possibility of using `scss` syntax and [tailwindcss](https://tailwindcss.com/) for styling.
 
 ## Getting started
 
-### Using `degit`
-
-[`degit`](https://github.com/Rich-Harris/degit) is a scaffolding tool that lets you create a directory from a branch in a repository. Use either the `rollup` or `webpack` branch in `sapper-template`:
-
-```bash
-# for Rollup
-npx degit "sveltejs/sapper-template#rollup" my-app
-# for webpack
-npx degit "sveltejs/sapper-template#webpack" my-app
-```
-
-### Using GitHub templates
-
-Alternatively, you can use GitHub's template feature with the [sapper-template-rollup](https://github.com/sveltejs/sapper-template-rollup) or [sapper-template-webpack](https://github.com/sveltejs/sapper-template-webpack) repositories.
+Download this project and name it however you want (e.g. `my-app`)
 
 ### Running the project
 
-However you get the code, you can install dependencies and run the project in development mode with:
+You can install dependencies and run the project in development mode with:
 
 ```bash
 cd my-app
 npm install # or yarn
-npm run dev
+npm run dev-draft # watch for changes in static/styles.scss and runs sapper in 'draft' mode, "npm run dev" can also be used
 ```
 
-Open up [localhost:3000](http://localhost:3000) and start clicking around.
+Open up [localhost:3000](http://localhost:3000) and start your project.
 
-Consult [sapper.svelte.dev](https://sapper.svelte.dev) for help getting started.
+## Deployment
 
-## Structure
+This boilerplate uses [Now](https://github.com/zeit/now) for deployment. There will be necessary to add the environment variables before using the scripts for deployment.
 
-Sapper expects to find two directories in the root of your project — `src` and `static`.
+### Environment Variables in `Now`
 
-### src
+First of all, you need to [install now](https://zeit.co/docs#install-now-cli) and login with your account. Once it is done, you can [define the environment variables](https://zeit.co/docs/v2/environment-variables-and-secrets/?query=environment#defining-environment-variables) in `now`.
 
-The [src](src) directory contains the entry points for your app — `client.js`, `server.js` and (optionally) a `service-worker.js` — along with a `template.html` file and a `routes` directory.
+The needed secrets names can be found in `now.json`:
 
-#### src/routes
-
-This is the heart of your Sapper app. There are two kinds of routes — _pages_, and _server routes_.
-
-**Pages** are Svelte components written in `.svelte` files. When a user first visits the application, they will be served a server-rendered version of the route in question, plus some JavaScript that 'hydrates' the page and initialises a client-side router. From that point forward, navigating to other pages is handled entirely on the client for a fast, app-like feel. (Sapper will preload and cache the code for these subsequent pages, so that navigation is instantaneous.)
-
-**Server routes** are modules written in `.js` files, that export functions corresponding to HTTP methods. Each function receives Express `request` and `response` objects as arguments, plus a `next` function. This is useful for creating a JSON API, for example.
-
-There are three simple rules for naming the files that define your routes:
-
--   A file called `src/routes/about.svelte` corresponds to the `/about` route. A file called `src/routes/blog/[slug].svelte` corresponds to the `/blog/:slug` route, in which case `params.slug` is available to the route
--   The file `src/routes/index.svelte` (or `src/routes/index.js`) corresponds to the root of your app. `src/routes/about/index.svelte` is treated the same as `src/routes/about.svelte`.
--   Files and directories with a leading underscore do _not_ create routes. This allows you to colocate helper modules and components with the routes that depend on them — for example you could have a file called `src/routes/_helpers/datetime.js` and it would _not_ create a `/_helpers/datetime` route
-
-### static
-
-The [static](static) directory contains any static assets that should be available. These are served using [sirv](https://github.com/lukeed/sirv).
-
-In your [service-worker.js](src/service-worker.js) file, you can import these as `files` from the generated manifest...
-
-```js
-import { files } from '@sapper/service-worker'
+```json
+{
+    "env": {
+        "CONTENTFUL_SPACE": "@contentful_space",
+        "CONTENTFUL_ACCESS_TOKEN": "@contentful_access_token",
+        "CONTENTFUL_STAGING_TOKEN": "@contentful_staging_token"
+    }
+}
 ```
 
-...so that you can cache them (though you can choose not to, for example if you don't want to cache very large files).
-
-## Bundler config
-
-Sapper uses Rollup or webpack to provide code-splitting and dynamic imports, as well as compiling your Svelte components. With webpack, it also provides hot module reloading. As long as you don't do anything daft, you can edit the configuration files to add whatever plugins you'd like.
-
-## Production mode and deployment
-
-To start a production version of your app, run `npm run build && npm start`. This will disable live reloading, and activate the appropriate bundler plugins.
-
-You can deploy your application to any environment that supports Node 8 or above. As an example, to deploy to [Now](https://zeit.co/now), run these commands:
+For example, to define the CONTENTFUL_SPACE variable it would be like this (notice that the secret-name has to be written in lowercase):
 
 ```bash
-npm install -g now
-now
+now secrets add 'contentful_space' 'XXXXXXXX'
 ```
 
-## Using external components
+### `Npm` scripts for deployment
 
-When using Svelte components installed from npm, such as [@sveltejs/svelte-virtual-list](https://github.com/sveltejs/svelte-virtual-list), Svelte needs the original component source (rather than any precompiled JavaScript that ships with the component). This allows the component to be rendered server-side, and also keeps your client-side app smaller.
+Once the environment variables are defined in `now` you can execute the scripts for deployment.
 
-Because of that, it's essential that the bundler doesn't treat the package as an _external dependency_. You can either modify the `external` option under `server` in [rollup.config.js](rollup.config.js) or the `externals` option in [webpack.config.js](webpack.config.js), or simply install the package to `devDependencies` rather than `dependencies`, which will cause it to get bundled (and therefore compiled) with your app:
+There are two `npm` scripts for deployment, one for production (`npm run deploy-production`) and another one for "draft" mode (`npm run deploy-draft`)``
 
-```bash
-npm install -D @sveltejs/svelte-virtual-list
+## Contentful and Svelte
+
+The goal of using Contentful with Svelte is to be able of create pages with different content and components on each one of them.
+
+For this reason, in this boilerplate there is some parallelism between Contentful models and Svelte components (i.e.: a component called `Button` can be associated to a model of type `Button` in Contentful). In order to do that, when a page is fetched from Contentfull, it will have this structure:
+
+```typescript
+// contentful.types.ts
+
+export type Page = {
+    id: string
+    title: string
+    slug: string
+    components: Array<Component>
+}
 ```
 
-## Bugs and feedback
+where `components` will be the array of components to be rendered on each page throught the `src/routes/[slug].svelte` file.
 
-Sapper is in early development, and may have the odd rough edge here and there. Please be vocal over on the [Sapper issue tracker](https://github.com/sveltejs/sapper/issues).
+## Structure and Usage
 
-## Tailwind integration (extra)
+Appart from everything that can be found on [Sapper](https://github.com/sveltejs/sapper-template) template, there are some new features like [Contentful](https://www.contentful.com/) integration and [tailwindcss](https://tailwindcss.com/).
 
-Tailwind's integration has been done following this tutorial: https://dev.to/sarioglu/using-svelte-with-tailwindcss-a-better-approach-47ph but with some differences due to that this tutorial is just for Svelte, without Sapper. The only difference is in the section "3-Make the integration", where there only has been created "postcss.config.js" (removing purgecss from it) and instead of changing "rollup.config.js" (which doesn't exists in Sapper), there has been modified the file "svelte.config.js" letting it like this:
+### `src/lib/contentful`
+
+In this directory, there are the necessary files to make the integration with `Contentful`.
+
+#### `contentful.ts`
+
+In this file, there is a class that contains the configuration for `Contentful` client and some functions to retrieve data from the contentful API. some environment variables can be found in the `constructor` of this class. These variables are necessary to connect your app with your contentful space. In order to do that, these variables are initialized in a `.env` file that you can copy from `.env.example` in the root folder. The API keys can be found in the contentful space settings.
+
+#### `contentful.types.ts`
+
+In this file, you can find some types that will be used along with contentful models in the fetch functions of `src/lib/contentful/contentful.ts`.
+
+### src/routes/[slug].json.js & src/routes/[slug].svelte
+
+These two files are used to retrieve the pages (content_type: 'page') from contentful API.
+
+The file `src/routes/[slug].json.js` uses the created `ContentfulApi` class to fetch the page content from `Contentful` depending on the `slug` introduced in any `/:slug` route.
+
+After fetching the data, the file `src/routes/[slug].svelte` renders the page content based on that data by importing a component called `ComponentSwitch` which will be the responsible for detecting the data type of `page.components` and rendering each component in the correct way.
 
 ```js
+// ComponentSwitch.svelte
+
+{#each page.components as componentData (componentData.id)}
+    <ComponentSwitch {componentData} />
+{/each}
+```
+
+### `src/components/ComponentSwitch.svelte`
+
+This component renders each "component" of `page.components` based on the `type` property of each one:
+
+```typescript
+// contentful.types.ts
+
+export type Component = {
+    id: string
+    type: string // based on this property (e.g.: 'button')
+    fields: Array<any>
+}
+```
+
+To do that, this component should have an array of objects which represent the relationship between a Contentful Model and a Svelte Component. The `id` property represents the Contentful Model type and the `component` property represents the Svelte Component itself (notice that each component has to be imported to this file).
+
+```js
+// ComponentSwitch.svelte
+
+let COMPONENT_LIST = [
+    { id: 'button', component: Button },
+    { id: 'richTextBlock', component: RichTextBlock },
+    { id: 'markdownBlock', component: MarkdownBlock }
+]
+```
+
+Finally, this component finds out which component should render and renders it whith its properties.
+
+## Scss & Tailwindcss
+
+This boilerplate uses both `tailwindcss` and `scss`.
+
+To integrate them, there has been used two aproaches, one for general styles and another one for component based styles.
+
+### Integration for general styles
+
+`npm` scripts has been used to achieve this integration. You can check `package.json` file to see all the existing scripts.
+
+The script used to run the app in development mode is `dev-draft` which throught other `npm` scripts compiles all `static/styles.scss` styles to a final file `static/styles.css` and runs the app in "draft" mode to be able of fetching "draft" content from Contentful, which is the best aproach for development purposes. If you need to find out more information about how these `npm` scripts work, this [css-tricks article](https://css-tricks.com/why-npm-scripts/) has been used as main reference.
+
+### Integration for `Svelte` components
+
+This integration has been done following this tutorial: https://dev.to/sarioglu/using-svelte-with-tailwindcss-a-better-approach-47ph but with some differences due to that this tutorial is just for Svelte (without Sapper). The only difference is in the section "3-Make the integration", where there only has been created "postcss.config.js" (removing purgecss from it) and instead of changing "rollup.config.js" (which doesn't exists in Sapper), there has been modified the file "svelte.config.js":
+
+```js
+// svelte.config.js
+
 const sveltePreprocess = require('svelte-preprocess')
 
 module.exports.preprocess = sveltePreprocess({
@@ -111,12 +160,19 @@ module.exports.preprocess = sveltePreprocess({
 })
 ```
 
-That's all from this tutorial.
+Notice that to use `scss` in components it is necessary write the `style` tag with `type="text/scss"`:
 
-To use the classes provided by Tailwind, this npm script has been used when initializing the app:
+```html
+<!-- SomeComponent.svelte -->
 
-```bash
-postcss static/tailwind.css -o static/global.css -w
+<style type="text/scss">
+    /* scss and tailwind styling here... */
+</style>
 ```
 
-wich creates a "global.css" with Tailwind's classes and the rest of css written in "static/tailwind.css".
+## Authors
+
+Boxfish Studio S.C.
+
+-   Pedro Monteagudo Jiménez - [@pedro199288](https://github.com/pedro199288)
+-   Begoña Álvarez de la Cruz - [@begonaalvarezd](https://github.com/begonaalvarezd)
