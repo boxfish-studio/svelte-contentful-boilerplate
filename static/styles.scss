@@ -22,6 +22,12 @@ h6 {
     line-height: 1.2;
 }
 
+h1 {
+    @apply text-3xl;
+    font-size: 4rem;
+    text-decoration: underline;
+}
+
 a {
     color: inherit;
 }
