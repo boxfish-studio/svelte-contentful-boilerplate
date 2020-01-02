@@ -1,5 +1,5 @@
 import { ContentfulClientApi, createClient } from 'contentful'
-import { Page, Test, Component, NavLink } from './contentful.types'
+import { Page, Component, NavLink } from './contentful.types'
 
 export class ContentfulApi {
     client: ContentfulClientApi
@@ -38,28 +38,6 @@ export class ContentfulApi {
             id: rawData.sys.id,
             title: rawProject.navBarTitle,
             slug: rawProject.slug
-        }
-    }
-
-    async fetchTests(): Promise<Array<Test>> {
-        return await this.client
-            .getEntries({
-                content_type: 'test'
-            })
-            .then((entries) => {
-                if (entries && entries.items && entries.items.length > 0) {
-                    const fetchedItems = entries.items.map((entry) => this.convertTest(entry))
-                    return fetchedItems
-                }
-                return []
-            })
-    }
-
-    convertTest = (rawData: any): Test => {
-        const rawProject = rawData.fields
-        return {
-            id: rawData.sys.id,
-            title: rawProject.title
         }
     }
 

@@ -22,12 +22,6 @@ h6 {
     line-height: 1.2;
 }
 
-h1 {
-    @apply text-3xl;
-    font-size: 4rem;
-    text-decoration: underline;
-}
-
 a {
     color: inherit;
 }
@@ -39,12 +33,6 @@ code {
     background-color: #f0f0f0;
     padding: 0.2em 0.4em;
     border-radius: 2px;
-}
-
-$border-color: black;
-
-.content {
-    border: 1px solid $border-color;
 }
 
 @media (min-width: 400px) {

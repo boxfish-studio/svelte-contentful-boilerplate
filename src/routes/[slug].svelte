@@ -19,14 +19,8 @@
 </script>
 
 <style type="text/scss">
-    $color: gray;
-
     h1 {
-        color: $color;
-    }
-
-    div {
-        background: lightgray;
+        @apply text-4xl;
     }
 </style>
 
@@ -37,7 +31,6 @@
 <h1>{page.title}</h1>
 
 <div class="content">
-
     {#each page.components as componentData (componentData.id)}
         <ComponentSwitch {componentData} />
     {/each}

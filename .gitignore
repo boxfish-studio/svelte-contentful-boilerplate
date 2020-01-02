@@ -6,3 +6,5 @@ yarn-error.log
 /__sapper__/
 /.vscode/
 .env
+static/styles.css
+static/styles-pre-tailwind.css

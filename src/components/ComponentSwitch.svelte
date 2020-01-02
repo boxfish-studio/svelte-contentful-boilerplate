@@ -1,6 +1,5 @@
 <script>
     import Button from './Button'
-    import SecondaryButton from './SecondaryButton'
     import RichTextBlock from './RichTextBlock'
     import MarkdownBlock from './MarkdownBlock'
 
@@ -8,7 +7,6 @@
 
     let COMPONENT_LIST = [
         { id: 'button', component: Button },
-        { id: 'secondaryButton', component: SecondaryButton },
         { id: 'richTextBlock', component: RichTextBlock },
         { id: 'markdownBlock', component: MarkdownBlock }
     ]
