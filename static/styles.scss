@@ -23,7 +23,9 @@ h6 {
 }
 
 h1 {
-    @apply text-4xl;
+    @apply text-3xl;
+    font-size: 4rem;
+    text-decoration: underline;
 }
 
 a {
