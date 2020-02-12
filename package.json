@@ -1,6 +1,6 @@
 {
-    "name": "TODO",
-    "description": "TODO",
+    "name": "boxfish@svelte-contentful-sandbox",
+    "description": "Svelte Sapper Contentful Boilerplate",
     "version": "0.0.1",
     "scripts": {
         "build:tailwind": "NODE_ENV=production postcss static/styles-pre-tailwind.css -o static/styles.css && npm run autoprefixer",
