@@ -1,5 +1,5 @@
 {
-    "name": "boxfish@svelte-contentful-sandbox",
+    "name": "svelte-contentful-boilerplate",
     "description": "Svelte Sapper Contentful Boilerplate",
     "version": "0.0.1",
     "scripts": {
