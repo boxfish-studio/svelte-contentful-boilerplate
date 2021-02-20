@@ -1,24 +1,48 @@
-# Svelte Sapper Contentful Boilerplate
+# Svelte-Sapper-Contentful-Tailwind-Webpack Boilerplate
 
-This is a boilerplate based on the default [Sapper](https://github.com/sveltejs/sapper) template, which also includes the CMS (Content Management System) [Contentful](https://www.contentful.com/).
+Boilerplate based on the default [Sapper](https://github.com/sveltejs/sapper) template. It allows setting up and kick-off your web project development within minutes. The boilerplate gathers:
 
-Besides, this boilerplate gives you the possibility of using `scss` syntax and [tailwindcss](https://tailwindcss.com/) for styling.
+* Svelte
+* [Contentful](https://www.contentful.com/) as Content Management System.
+* `scss` syntax and [tailwindcss](https://tailwindcss.com/) for styling.
+* Webpack
 
 ## Getting started
 
-Download this project and name it however you want (e.g. `my-app`)
+### Get the code
 
-### Running the project
-
-You can install dependencies and run the project in development mode with:
+Clone the project and dive in.  this project and name it however you want (e.g. `my-app`)
 
 ```bash
-cd my-app
-npm install # or yarn
-npm run dev-draft # watch for changes in static/styles.scss and runs sapper in 'draft' mode, "npm run dev" can also be used
+git clone git@github.com:boxfish-studio/svelte-contentful-boilerplate.git
+cd svelte-contentful-boilerplate
 ```
 
-Open up [localhost:3000](http://localhost:3000) and start your project.
+### Connect to Contentful
+
+Make a copy of .env.example
+
+```bash
+cp .env.example .env
+```
+
+Fill in the blanks with your Contentful space id and API tokens 
+```bash
+CONTENTFUL_SPACE=your_space_id
+CONTENTFUL_ACCESS_TOKEN=your_space_delivery_token
+CONTENTFUL_STAGING_TOKEN=your_space_preview_token
+```
+
+### Run
+
+Install dependancies and run:
+
+```bash
+npm install # or yarn
+npm run dev # watch for changes in static/styles.scss and runs sapper in 'draft' mode
+```
+
+The site should be available at [localhost:3000](http://localhost:3000).
 
 ## Deployment
 
