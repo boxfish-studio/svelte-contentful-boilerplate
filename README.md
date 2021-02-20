@@ -1,11 +1,12 @@
 # Svelte-Sapper-Contentful-Tailwind-Webpack Boilerplate
 
-Boilerplate based on the default [Sapper](https://github.com/sveltejs/sapper) template. It allows setting up and kick-off your web project development within minutes. The boilerplate gathers:
+Boilerplate based on the default [Sapper] template. It allows setting up and kick-off your web project development within minutes. The boilerplate gathers:
 
 * Svelte
-* [Contentful](https://www.contentful.com/) as Content Management System.
-* `scss` syntax and [tailwindcss](https://tailwindcss.com/) for styling.
+* [Contentful] as Content Management System.
+* `scss` syntax and [Tailwindcss] for styling.
 * Webpack
+* Deployment in [Now]
 
 ## Getting started
 
@@ -20,14 +21,14 @@ cd svelte-contentful-boilerplate
 
 ### Connect to Contentful
 
-Make a copy of .env.example
+Create [Contentful] environment file based on the given template
 
 ```bash
 cp .env.example .env
 ```
 
-Fill in the blanks with your Contentful space id and API tokens 
-```bash
+Fill in the blank variables with your own [Contentful] space parameters 
+```
 CONTENTFUL_SPACE=your_space_id
 CONTENTFUL_ACCESS_TOKEN=your_space_delivery_token
 CONTENTFUL_STAGING_TOKEN=your_space_preview_token
@@ -196,7 +197,11 @@ Notice that to use `scss` in components it is necessary write the `style` tag wi
 
 ## Authors
 
-Boxfish Studio S.C.
+[Boxfish Studio].
 
--   Pedro Monteagudo Jiménez - [@pedro199288](https://github.com/pedro199288)
--   Begoña Álvarez de la Cruz - [@begonaalvarezd](https://github.com/begonaalvarezd)
+
+[Boxfish Studio]: http://boxfish.studio
+[Contentful]: https://www.contentful.com/
+[Sapper]: https://github.com/sveltejs/sapper
+[Tailwindcss]: https://tailwindcss.com/
+[Now]: https://github.com/zeit/now
