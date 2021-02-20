@@ -38,8 +38,8 @@ CONTENTFUL_STAGING_TOKEN=your_space_preview_token
 Install dependancies and run:
 
 ```bash
-npm install # or yarn
-npm run dev # watch for changes in static/styles.scss and runs sapper in 'draft' mode
+yarn
+yarn dev
 ```
 
 The site should be available at [localhost:3000](http://localhost:3000).
