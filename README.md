@@ -1,17 +1,18 @@
 # Svelte-Sapper-Contentful-Tailwind-Webpack Boilerplate
 
-Boilerplate based on the default [Sapper](https://github.com/sveltejs/sapper) template. It allows setting up and kick-off your web project development within minutes. The boilerplate gathers:
+Boilerplate based on the default [Sapper] template. It allows setting up and kick-off your web project development within minutes. The boilerplate gathers:
 
 * Svelte
-* [Contentful](https://www.contentful.com/) as Content Management System.
-* `scss` syntax and [tailwindcss](https://tailwindcss.com/) for styling.
+* [Contentful] as Content Management System.
+* `scss` syntax and [Tailwindcss] for styling.
 * Webpack
+* Deployment in [Now]
 
 ## Getting started
 
 ### Get the code
 
-Clone the project and dive in.  this project and name it however you want (e.g. `my-app`)
+Clone the project and dive in. 
 
 ```bash
 git clone git@github.com:boxfish-studio/svelte-contentful-boilerplate.git
@@ -20,14 +21,14 @@ cd svelte-contentful-boilerplate
 
 ### Connect to Contentful
 
-Make a copy of .env.example
+Create [Contentful] environment file based on the given template
 
 ```bash
 cp .env.example .env
 ```
 
-Fill in the blanks with your Contentful space id and API tokens 
-```bash
+Fill in the blank variables with your own [Contentful] space parameters 
+```
 CONTENTFUL_SPACE=your_space_id
 CONTENTFUL_ACCESS_TOKEN=your_space_delivery_token
 CONTENTFUL_STAGING_TOKEN=your_space_preview_token
@@ -46,9 +47,9 @@ The site should be available at [localhost:3000](http://localhost:3000).
 
 ## Deployment
 
-This boilerplate uses [Now](https://github.com/zeit/now) for deployment. There will be necessary to add the environment variables before using the scripts for deployment.
+The project deploys with [Now] by default. There will be necessary to add the environment variables before using the scripts for deployment.
 
-### Environment Variables in `Now`
+### Environment Variables in [Now]
 
 First of all, you need to [install now](https://zeit.co/docs#install-now-cli) and login with your account. Once it is done, you can [define the environment variables](https://zeit.co/docs/v2/environment-variables-and-secrets/?query=environment#defining-environment-variables) in `now`.
 
@@ -64,12 +65,6 @@ The needed secrets names can be found in `now.json`:
 }
 ```
 
-For example, to define the CONTENTFUL_SPACE variable it would be like this (notice that the secret-name has to be written in lowercase):
-
-```bash
-now secrets add 'contentful_space' 'XXXXXXXX'
-```
-
 ### `Npm` scripts for deployment
 
 Once the environment variables are defined in `now` you can execute the scripts for deployment.
@@ -78,9 +73,9 @@ There are two `npm` scripts for deployment, one for production (`npm run deploy-
 
 ## Contentful and Svelte
 
-The goal of using Contentful with Svelte is to be able of create pages with different content and components on each one of them.
+The goal of using Svelte with [Contentful] is to be able to easily manage content and components. Therefore, there must be certain relation between [Contentful] models and Svelte components (i.e.: a component called `Button` could be associated to the model `Button` in Contentful).
 
-For this reason, in this boilerplate there is some parallelism between Contentful models and Svelte components (i.e.: a component called `Button` can be associated to a model of type `Button` in Contentful). In order to do that, when a page is fetched from Contentfull, it will have this structure:
+On the other hand, a page from [Contentful] will be composed as:
 
 ```typescript
 // contentful.types.ts
@@ -93,15 +88,15 @@ export type Page = {
 }
 ```
 
-where `components` will be the array of components to be rendered on each page throught the `src/routes/[slug].svelte` file.
+Where `components` defines all components to be injected into the rendered `src/routes/[slug].svelte` file.
 
 ## Structure and Usage
 
-Appart from everything that can be found on [Sapper](https://github.com/sveltejs/sapper-template) template, there are some new features like [Contentful](https://www.contentful.com/) integration and [tailwindcss](https://tailwindcss.com/).
+On top of the standard [Sapper template], [Contentful] and [tailwindcss] have been added.
 
 ### `src/lib/contentful`
 
-In this directory, there are the necessary files to make the integration with `Contentful`.
+This folder hosts the necessary files for the integration with `Contentful`.
 
 #### `contentful.ts`
 
@@ -196,7 +191,12 @@ Notice that to use `scss` in components it is necessary write the `style` tag wi
 
 ## Authors
 
-Boxfish Studio S.C.
+[Boxfish Studio].
 
--   Pedro Monteagudo Jiménez - [@pedro199288](https://github.com/pedro199288)
--   Begoña Álvarez de la Cruz - [@begonaalvarezd](https://github.com/begonaalvarezd)
+
+[Boxfish Studio]: http://boxfish.studio
+[Contentful]: https://www.contentful.com/
+[Sapper]: https://github.com/sveltejs/sapper
+[Sapper template]: https://github.com/sveltejs/sapper-template
+[Tailwindcss]: https://tailwindcss.com/
+[Now]: https://github.com/zeit/now
