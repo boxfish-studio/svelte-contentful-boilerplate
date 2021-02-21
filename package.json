@@ -25,7 +25,7 @@
         "contentful": "^8.0.3",
         "css-loader": "^3.3.2",
         "dotenv": "^8.2.0",
-        "marked": "^0.8.0",
+        "marked": "^1.1.1",
         "now-sapper": "^0.37.1",
         "polka": "next",
         "postcss": "^7.0.25",
