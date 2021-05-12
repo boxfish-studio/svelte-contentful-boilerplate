@@ -28,7 +28,7 @@
         "marked": "^0.8.0",
         "now-sapper": "^0.37.1",
         "polka": "next",
-        "postcss": "^7.0.25",
+        "postcss": "^8.2.10",
         "postcss-import": "^12.0.1",
         "postcss-loader": "^3.0.0",
         "postcss-preset-env": "^6.7.0",
